@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Uca</h1>
-<h3 align="center">It's just my testing project on purpose research laravel testing</h3>
+<h3 align="center">It's just my testing project in purpose research laravel testing</h3>
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
