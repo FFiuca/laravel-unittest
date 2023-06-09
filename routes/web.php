@@ -22,4 +22,5 @@ Route::get('/', function () {
 Route::prefix('/test')->group(function(){
     Route::get('/testResponse', [TestController::class, 'testResponse']);
     Route::get('/testResponse2', [TestController::class, 'testResponse2']);
+    Route::post('/testResponse3', [TestController::class, 'testResponse3']);
 });

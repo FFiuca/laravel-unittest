@@ -8,9 +8,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseTruncation;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+
+use App\Models\Room;
+use Database\Seeders\RoomSeeder;
 
 
 class CobaTest extends TestCase
@@ -66,5 +70,31 @@ class CobaTest extends TestCase
         ]);
     }
 
+    function test_running_seeder() : void{
+        $this->seed();
+        // $this->seed(Seeder::class); single seeder
+
+        $r = Room::all();
+
+        $this->assertEquals(3, $r->count());
+    }
+
+    function test_post_data_with_validating_structure():void {
+       $this->seed([RoomSeeder::class]);
+       
+       $r = Room::first();
+        $res = $this->post('/test/testResponse3');
+        // Log::info((array)$res);
+       $res->assertStatus(200)
+            ->assertJsonPath('status', 200)
+            ->assertJsonStructure([
+                'status',
+                    'data' => [
+                        'id',
+                        'status',
+                        'room_name',
+                    ]
+            ]);
+    }
 
 }
